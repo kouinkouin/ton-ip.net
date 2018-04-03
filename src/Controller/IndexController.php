@@ -25,7 +25,10 @@ class IndexController extends Controller
 
         switch (true) {
             case $this->userAgentParser->isCliUserAgent($request->headers->get('User-Agent')):
-                return new Response(array_shift($remoteIps));
+                $response = new Response(array_shift($remoteIps));
+                $response->headers->set('content-type', 'text/plain');
+
+                return $response;
 
             default:
                 return $this->json($remoteIps);
