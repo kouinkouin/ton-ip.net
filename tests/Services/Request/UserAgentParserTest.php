@@ -13,7 +13,7 @@ class UserAgentParserTest extends TestCase
      *
      * @dataProvider dataIsCliUserAgent
      */
-    public function testIsCliUserAgent(string $userAgent, bool $expected)
+    public function testIsCliUserAgent(?string $userAgent, bool $expected)
     {
         $parser = new UserAgentParser();
 
@@ -25,5 +25,6 @@ class UserAgentParserTest extends TestCase
         yield ['Mozilla/5.0 (X11; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0', false];
         yield ['curl/7.52.1', true];
         yield ['Wget/1.18', true];
+        yield [null, true];
     }
 }

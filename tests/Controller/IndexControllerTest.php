@@ -12,7 +12,7 @@ class IndexControllerTest extends WebTestCase
      *
      * @dataProvider dataIndexAction
      */
-    public function testIndexAction(string $userAgent, array $expectedHeaders)
+    public function testIndexAction(?string $userAgent, array $expectedHeaders)
     {
         $client = self::createClient();
         $client->request('GET', '/', [], [], ['HTTP_USER_AGENT' => $userAgent]);
@@ -32,5 +32,6 @@ class IndexControllerTest extends WebTestCase
         ];
         yield ['curl/7.52.1', ['content-type' => 'text/plain; charset=UTF-8']];
         yield ['Wget/1.18', ['content-type' => 'text/plain; charset=UTF-8']];
+        yield [null, ['content-type' => 'text/plain; charset=UTF-8']];
     }
 }
