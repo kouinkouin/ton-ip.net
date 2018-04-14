@@ -28,7 +28,7 @@ class IndexControllerTest extends WebTestCase
     {
         yield [
             'Mozilla/5.0 (X11; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0',
-            ['content-type' => 'application/json'],
+            ['content-type' => 'text/html; charset=UTF-8'],
         ];
         yield ['curl/7.52.1', ['content-type' => 'text/plain; charset=UTF-8']];
         yield ['Wget/1.18', ['content-type' => 'text/plain; charset=UTF-8']];

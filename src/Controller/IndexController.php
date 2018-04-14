@@ -23,15 +23,13 @@ class IndexController extends Controller
     {
         $remoteIps = $request->getClientIps();
 
-        switch (true) {
-            case $this->userAgentParser->isCliUserAgent($request->headers->get('User-Agent')):
-                $response = new Response(array_shift($remoteIps));
-                $response->headers->set('content-type', 'text/plain');
+        if ($this->userAgentParser->isCliUserAgent($request->headers->get('User-Agent'))) {
+            $response = new Response(array_shift($remoteIps));
+            $response->headers->set('content-type', 'text/plain');
 
-                return $response;
-
-            default:
-                return $this->json($remoteIps);
+            return $response;
         }
+
+        return $this->render("index.html.twig", ['remoteIps' => $remoteIps]);
     }
 }
