@@ -24,10 +24,7 @@ class IndexController extends Controller
         $remoteIps = $request->getClientIps();
 
         if ($this->userAgentParser->isCliUserAgent($request->headers->get('User-Agent'))) {
-            $response = new Response(array_shift($remoteIps));
-            $response->headers->set('content-type', 'text/plain');
-
-            return $response;
+            return new Response(array_shift($remoteIps), Response::HTTP_OK, ['content-type' => 'text/plain']);
         }
 
         return $this->render("index.html.twig", ['remoteIps' => $remoteIps]);
