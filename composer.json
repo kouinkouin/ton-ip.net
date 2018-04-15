@@ -15,6 +15,7 @@
     "require-dev": {
         "symfony/browser-kit": "^4.0",
         "symfony/dotenv": "^4.0",
+        "symfony/maker-bundle": "^1.4",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/web-server-bundle": "^4.0"
     },
