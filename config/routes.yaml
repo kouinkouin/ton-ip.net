@@ -1,3 +1,11 @@
 index:
     path: /
     controller: App\Controller\IndexController::indexAction
+
+demand_new:
+    path: /new
+    controller: App\Controller\DemandController::newAction
+
+demand:
+    path: /{code}
+    controller: App\Controller\DemandController::showAction
