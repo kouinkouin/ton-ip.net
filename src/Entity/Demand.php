@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DemandRepository")
@@ -25,6 +26,7 @@ class Demand
     private $creation_datetime;
 
     /**
+     * @Assert\Email()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $receiver_email;
@@ -38,11 +40,15 @@ class Demand
      * @ORM\Column(type="smallint")
      */
     private $status;
-
     /**
-     * @ORM\Column(type="json_array", nullable=true)
+     * @Assert\Ip(version="all")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $responseData;
+    private $ip;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $userAgent;
 
     public function __construct()
     {
@@ -50,17 +56,17 @@ class Demand
         $this->status = self::STATUS_NEW;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getCreationDatetime(): ?\DateTimeInterface
+    public function getCreationDatetime(): ?\DateTimeImmutable
     {
         return $this->creation_datetime;
     }
 
-    public function setCreationDatetime(\DateTimeInterface $creation_datetime): self
+    public function setCreationDatetime(\DateTimeImmutable $creation_datetime): self
     {
         $this->creation_datetime = $creation_datetime;
 
@@ -79,12 +85,12 @@ class Demand
         return $this;
     }
 
-    public function getResponseDatetime(): ?\DateTimeInterface
+    public function getResponseDatetime(): ?\DateTimeImmutable
     {
         return $this->response_datetime;
     }
 
-    public function setResponseDatetime(?\DateTimeInterface $response_datetime): self
+    public function setResponseDatetime(?\DateTimeImmutable $response_datetime): self
     {
         $this->response_datetime = $response_datetime;
 
@@ -103,14 +109,26 @@ class Demand
         return $this;
     }
 
-    public function getResponseData()
+    public function getIp(): ?string
     {
-        return $this->responseData;
+        return $this->ip;
     }
 
-    public function setResponseData($responseData): self
+    public function setIp(?string $ip): self
     {
-        $this->responseData = $responseData;
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getUserAgent(): ?string
+    {
+        return $this->userAgent;
+    }
+
+    public function setUserAgent(?string $userAgent): self
+    {
+        $this->userAgent = $userAgent;
 
         return $this;
     }
