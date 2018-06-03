@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Demand
 {
     const STATUS_NEW = 1;
+    const STATUS_READ = 10;
+    const STATUS_FILLED = 100;
 
     /**
      * @ORM\Id()
